@@ -31,9 +31,11 @@ input.mr-2{
   background-color: #01054c;
   color: #fff;
 }
+
 .list-group-item{
   position: relative;
 }
+
 .float-right{
   position: absolute;
   right: 10px;
@@ -44,4 +46,5 @@ input.mr-2{
   .btn-dark{
     margin-top: 15px;
   }
+  
 }
