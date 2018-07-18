@@ -8,6 +8,8 @@ var err = document.getElementById('error');
 //Grab the Item value in the Text box in the
 var newItem = document.getElementById('newItem');
 
+var filter = document.getElementById('filter');
+
 //Ul Items
 var listItems = document.getElementById('items');
 
@@ -19,8 +21,29 @@ newItem.addEventListener('keydown',function(e){
   err.style.display = 'none';
 });
 
-//Add event Listener to remov items
-listItems.addEventListener('click',remeoveItem);
+//search Items
+filter.addEventListener('keyup',function(e){
+  //Convert the text to lower case
+  var txtLower = e.target.value.toLowerCase();
+
+  // Get the List in the Items
+  var itemList = listItems.getElementsByTagName('li');
+
+  //Convert the itemList to an array
+  Array.from(itemList).forEach(function(elem){
+    //Grab the firstchild element text
+    var item = elem.firstChild.textContent
+
+    if(item.toLowerCase().indexOf(txtLower) !== -1){
+      elem.style.display = 'block';
+    }else{
+      elem.style.display = 'none';
+    }
+  });
+});
+
+//Add event Listener to remove items
+listItems.addEventListener('click',removeItem);
 
 
 
@@ -59,5 +82,12 @@ function addItem(e){
 
 
 function removeItem(e){
-   console.log(1);
+   if(e.target.classList.contains('delete')){
+     if(confirm('Do you want to delete ' + e.target.parentElement.textContent + '?')){
+       //e.target.parentElement.style.display = 'none';
+
+       var li = e.target.parentElement;
+       listItems.removeChild(li);
+     }
+   }
 }
